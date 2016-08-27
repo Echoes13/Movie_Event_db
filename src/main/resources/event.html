@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title th:text="${event.name}">JCVD</title>
+    </head>
+    <body>
+
+        <h1><span th:text="${event.name}">JCVD</span></h1>
+
+        <h2>Movies</h2>
+
+        <div>
+            <ul>
+                <li th:each="choice : ${event.movies}" th:text="${choice.movie.name} +
+                    ' chosen by ' + ${choice.chosenBy}"></li>
+            </ul>
+        </div>
+
+        <!--
+        <div th:if="${not #lists.isEmpty(movies)}">
+
+            <h2>Add movie to the event</h2>
+
+            <form method="POST" th:action="@{/actors/{actorId}/movies(actorId=${actor.id})}">
+                <select name="movieId">
+                    <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.name}">movie</option>
+                </select>
+                <input type="submit" value="Add to event" id="add-to-movie"/>
+            </form>
+        </div>
+        -->
+        <div><a href="/events">Back to list of events</a></div>
+
+    </body>
+
+</html>
