@@ -1,4 +1,4 @@
-package eventdb.domain;
+package wad.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +11,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Movie extends AbstractPersistable<Long> {
 
-    @NotBlank
     private String name;
     
-    @NotBlank
     private Integer lengthInMinutes;
     
     private String imdbCode;
     
-    @NotBlank
     @OneToMany(fetch = FetchType.EAGER)
     private List<MovieChoice> choices;
 
@@ -56,6 +53,13 @@ public class Movie extends AbstractPersistable<Long> {
  
         this.choices.add(choice);
     }
+    
+    public void removeChoice(MovieChoice choice) {
+        if (!this.choices.contains(choice)) {
+            return;            
+        }
+        this.choices.remove(choice);
+    }
  
     public List<MovieChoice> getChoices() {
         return choices;
@@ -64,4 +68,5 @@ public class Movie extends AbstractPersistable<Long> {
     public void setChoices(List<MovieChoice> choices) {
         this.choices = choices;
     }
+    
 }

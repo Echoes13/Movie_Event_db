@@ -1,4 +1,4 @@
-package eventdb.domain;
+package wad.domain;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -18,10 +17,8 @@ public class Event extends AbstractPersistable<Long> {
     @ManyToOne
     private GroupAccount user;
     
-    @NotBlank
     private String name;
     
-    @NotBlank
     @Temporal(TemporalType.DATE)
     private Date date;
     
@@ -29,6 +26,10 @@ public class Event extends AbstractPersistable<Long> {
     private List<MovieChoice> movies;
     
     private Integer length;
+    
+    public Event() {
+        this.length = 0;
+    }
     
     
     public String getName() {
@@ -51,8 +52,15 @@ public class Event extends AbstractPersistable<Long> {
         if (this.movies == null) {
             this.movies = new ArrayList<MovieChoice>();
         }
- 
+        addLength(movie);
         this.movies.add(movie);
+    }
+    
+    public void removeMovie(MovieChoice movie) {
+        if (!this.movies.contains(movie)) {
+            return;            
+        }
+        this.movies.remove(movie);
     }
  
     public List<MovieChoice> getMovies() {
@@ -60,6 +68,10 @@ public class Event extends AbstractPersistable<Long> {
     }
  
     public void setMovies(List<MovieChoice> movies) {
+        length = 0;
+        for(MovieChoice movie : movies) {
+            addLength(movie);
+        }
         this.movies = movies;
     }
     
@@ -69,5 +81,9 @@ public class Event extends AbstractPersistable<Long> {
     
     public void setLength(Integer length) {
         this.length = length;
+    }
+    
+    public void addLength(MovieChoice movie) {
+        length += movie.getMovie().getLengthInMinutes();
     }
 }

@@ -17,19 +17,19 @@
             </ul>
         </div>
 
-        <!--
         <div th:if="${not #lists.isEmpty(movies)}">
 
             <h2>Add movie to the event</h2>
 
-            <form method="POST" th:action="@{/actors/{actorId}/movies(actorId=${actor.id})}">
+            <form method="POST" th:action="@{/events/{eventId}/movies(eventId=${event.id})}">
                 <select name="movieId">
                     <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.name}">movie</option>
                 </select>
-                <input type="submit" value="Add to event" id="add-to-movie"/>
+                <p>Movie chosen by: <input type="text" name="chosenBy"></input></p>
+                <input type="submit" value="Add to event" id="add-to-event"/>
             </form>
         </div>
-        -->
+
         <div><a href="/events">Back to list of events</a></div>
 
     </body>

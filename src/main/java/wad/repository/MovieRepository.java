@@ -1,8 +1,8 @@
-package eventdb.repository;
+package wad.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import eventdb.domain.Movie;
+import wad.domain.Movie;
 
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-
+    public Movie findByName(String name);
 }

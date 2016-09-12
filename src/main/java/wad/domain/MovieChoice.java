@@ -1,4 +1,4 @@
-package eventdb.domain;
+package wad.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,14 +9,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class MovieChoice extends AbstractPersistable<Long> {
 
-    @NotBlank
     private String chosenBy;
     
-    @NotBlank
     @ManyToOne(fetch = FetchType.EAGER)
     private Event event;
     
-    @NotBlank
     @ManyToOne(fetch = FetchType.EAGER)
     private Movie movie;
 

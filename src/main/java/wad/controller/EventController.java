@@ -1,4 +1,4 @@
-package eventdb.controller;
+package wad.controller;
 
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import eventdb.repository.EventRepository;
-import eventdb.repository.MovieRepository;
-import eventdb.service.EventService;
+import wad.repository.EventRepository;
+import wad.repository.MovieRepository;
+import wad.service.EventService;
 
 @Controller
 @RequestMapping("/events")
@@ -51,6 +51,15 @@ public class EventController {
     public String deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
         return "redirect:/events";
+    }
+    
+    @RequestMapping(value = "/{eventId}/movies", method = RequestMethod.POST)
+    public String addMovieToEvent(Model model, 
+            @RequestParam(value = "chosenBy") String chosenBy,
+            @RequestParam(value = "movieId") Long movieId, 
+            @PathVariable(value = "actorId") Long eventId) {
+        eventService.addMovieToEvent(eventId, movieId, chosenBy);
+        return "redirect:/events/{eventId}";
     }
     
 }

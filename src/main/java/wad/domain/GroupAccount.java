@@ -1,4 +1,4 @@
-package eventdb.domain;
+package wad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
