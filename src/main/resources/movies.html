@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movies</title>
+        <meta charset="UTF-8" />
     </head>
     <body>
-        <div>TODO write content</div>
+        <h1>Movies</h1>
+        
+        <ul>
+            <li th:each="movie ${movies}">
+                <a th:href="@{/movies/{movieId}(movieId=${movie.id})}" th:text="${movie.name}">movie name</a>
+
+                <form th:action="@{/movies/{movieId}(movieId=${movie.id})}" th:method="DELETE">
+                    <input type="submit" value="Remove" th:id="${'remove-' + movie.id}"/>
+                </form>
+            </li>
+        </ul>
+
+        <h2>Add a new movie</h2>
+        <form th:action="@{/movies}" method="POST">
+            <p>Name: <input type="text" name="name"></input></p>
+            <p>Length in minutes: <input type="number" name="lengthInMinutes"></input></p>
+            <input type="submit" value="Add"></input>
+        </form>
+        
     </body>
 </html>
