@@ -1,5 +1,6 @@
 language: java
-mvn test
-mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-install: ./install-dependencies.sh
+
+install:
+- mvn test
+- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
