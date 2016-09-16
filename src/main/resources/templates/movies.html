@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Movies</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Movies</h1>
+        
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <tr th:each="movie : ${movies}">
+                <td>
+                    <a th:href="@{/movies/{movieId}(movieId=${movie.id})}"
+                        th:text="${movie.name}">movie name</a>
+                </td>
+                <td>
+                    <form th:action="@{/movies/{movieId}(movieId=${movie.id})}" th:method="DELETE">
+                        <input type="submit" value="Remove" th:id="${'remove-' + movie.id}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+        <h2>Add a new movie</h2>
+        <form th:action="@{/movies}" method="POST">
+            <p>Name: <input type="text" name="name"></input></p>
+            <p>Length in minutes: <input type="number" name="lengthInMinutes"></input></p>
+            <p>IMDb-code <input type="text" name="imdb"></input></p>
+            <input type="submit" value="Add"></input>
+        </form>
+        
+        <div><a href="/events">Events</a></div>
+        
+    </body>
+</html>

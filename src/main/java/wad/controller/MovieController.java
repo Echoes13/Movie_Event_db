@@ -40,8 +40,8 @@ public class MovieController {
     
     @RequestMapping(method = RequestMethod.POST)
     public String addMovie(@RequestParam String name,
-            @RequestParam Integer length, @RequestParam String imdb) {
-        eventService.createMovie(name, length, imdb);
+            @RequestParam Integer lengthInMinutes, @RequestParam String imdb) {
+        eventService.createMovie(name, lengthInMinutes, imdb);
         return "redirect:/movies";
     }
     

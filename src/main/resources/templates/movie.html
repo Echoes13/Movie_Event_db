@@ -8,13 +8,13 @@
 
         <h1><span th:text="${movie.name}">JCVD</span></h1>
         
-        <div><a href="@{http://www.imdb.com/title/tt{imdb}(imdb=${movie.imdbCode})}">Link to imdb-page of the movie</a></div>
+        <div><a th:href="@{http://www.imdb.com/title/tt{code}(code=${movie.imdbCode})}">Link to imdb-page of the movie</a></div>
 
         <h2>Events</h2>
 
         <div>
             <ul>
-                <li th:each="event : ${movie.events}" th:text="${event.name}"></li>
+                <li th:each="choice : ${movie.choices}" th:text="${choice.event.name}"></li>
             </ul>
         </div>
 

@@ -42,7 +42,7 @@ public class EventController {
     
     @RequestMapping(method = RequestMethod.POST)
     public String addEvent(@RequestParam String name,
-            @RequestParam @DateTimeFormat(pattern = "dd-MM-yyyy") Date date) {
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
         eventService.createEvent(name, date);
         return "redirect:/events";
     }
@@ -57,7 +57,7 @@ public class EventController {
     public String addMovieToEvent(Model model, 
             @RequestParam(value = "chosenBy") String chosenBy,
             @RequestParam(value = "movieId") Long movieId, 
-            @PathVariable(value = "actorId") Long eventId) {
+            @PathVariable(value = "eventId") Long eventId) {
         eventService.addMovieToEvent(eventId, movieId, chosenBy);
         return "redirect:/events/{eventId}";
     }
