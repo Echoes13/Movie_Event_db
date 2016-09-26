@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wad.domain.Event;
+import wad.domain.GroupAccount;
 import wad.domain.Movie;
 import wad.domain.MovieChoice;
 import wad.repository.EventRepository;
@@ -26,10 +27,12 @@ public class EventService {
     private MovieChoiceRepository movieChoiceRepository;
     
 
-    public Event createEvent(String name, Date date) {
+    public Event createEvent(String name, Date date, GroupAccount group) {
         Event event = new Event();
         event.setName(name);
         event.setDate(date);
+        event.setGroup(group);
+        group.addEvent(event);
         
         return eventRepository.save(event);
     }

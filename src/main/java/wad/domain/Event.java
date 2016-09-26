@@ -9,23 +9,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Event extends AbstractPersistable<Long> {
 
-    @ManyToOne
-    private GroupAccount user;
-    
     private String name;
     
     @Temporal(TemporalType.DATE)
     private Date date;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="event", fetch = FetchType.EAGER)
     private List<MovieChoice> movies;
     
     private Integer length;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    private GroupAccount group;
     
     public Event() {
         this.length = 0;
@@ -85,5 +86,13 @@ public class Event extends AbstractPersistable<Long> {
     
     public void addLength(MovieChoice movie) {
         length += movie.getMovie().getLengthInMinutes();
+    }
+    
+    public GroupAccount getGroup() {
+        return group;
+    }
+    
+    public void setGroup(GroupAccount group) {
+        this.group = group;
     }
 }

@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <title th:text="${event.name}">JCVD</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
 
@@ -17,6 +20,8 @@
             </ul>
         </div>
 
+        <h3>Marathon length: <span th:text="${event.length}"></span>min</h3>        
+        
         <div th:if="${not #lists.isEmpty(movies)}">
 
             <h2>Add movie to the event</h2>

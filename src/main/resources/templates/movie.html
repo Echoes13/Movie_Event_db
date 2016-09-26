@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <title th:text="${movie.name}">JCVD</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
 
@@ -11,6 +14,7 @@
         <div><a th:href="@{http://www.imdb.com/title/tt{code}(code=${movie.imdbCode})}">Link to imdb-page of the movie</a></div>
 
         <h2>Events</h2>
+        <h3>Note: If the same event is mentioned repeatedly, it means that the movie has been watched that many times during the event.</h3>
 
         <div>
             <ul>

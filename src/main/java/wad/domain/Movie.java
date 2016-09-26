@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -17,7 +18,7 @@ public class Movie extends AbstractPersistable<Long> {
     
     private String imdbCode;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="movie", fetch = FetchType.EAGER)
     private List<MovieChoice> choices;
 
     

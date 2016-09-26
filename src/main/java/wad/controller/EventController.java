@@ -1,15 +1,22 @@
 package wad.controller;
 
 import java.util.Date;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import wad.domain.Event;
+import wad.domain.GroupAccount;
 import wad.repository.EventRepository;
+import wad.repository.GroupRepository;
 import wad.repository.MovieRepository;
 import wad.service.EventService;
 
@@ -24,12 +31,16 @@ public class EventController {
     public MovieRepository movieRepository;
     
     @Autowired
+    public GroupRepository groupRepository;
+    
+    @Autowired
     public EventService eventService;
     
     
     @RequestMapping(method = RequestMethod.GET)
     public String listEvents(Model model) {
-        model.addAttribute("events", eventRepository.findAll());
+        GroupAccount group = getGroup();
+        model.addAttribute("events", group.getEvents());
         return "events";
     }
     
@@ -43,7 +54,8 @@ public class EventController {
     @RequestMapping(method = RequestMethod.POST)
     public String addEvent(@RequestParam String name,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
-        eventService.createEvent(name, date);
+        
+        eventService.createEvent(name, date, getGroup());
         return "redirect:/events";
     }
     
@@ -62,4 +74,9 @@ public class EventController {
         return "redirect:/events/{eventId}";
     }
     
+    
+    public GroupAccount getGroup() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return groupRepository.findByUsername(auth.getName());
+    }
 }

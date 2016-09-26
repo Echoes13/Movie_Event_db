@@ -3,6 +3,9 @@
     <head>
         <title>Events</title>
         <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
         <h1>Events</h1>
@@ -28,10 +31,21 @@
         
         <h2>Add a new event</h2>
         <form th:action="@{/events}" method="POST">
-            <p>Name: <input type="text" name="name"></input></p>
-            <p>Date: <input type="date" name="date"></input></p>
-            <input type="submit" value="Add"></input>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td><input type="date" name="date" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Add</button></td>
+                </tr>
+            </table>
         </form>
+        
         
         <div><a href="/movies">Movies</a></div>
         

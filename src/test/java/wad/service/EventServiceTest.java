@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import wad.domain.Event;
+import wad.domain.GroupAccount;
 import wad.domain.Movie;
 import wad.repository.EventRepository;
 import wad.repository.MovieChoiceRepository;
@@ -41,7 +42,7 @@ public class EventServiceTest {
     public void testEventCreatedAndDeleted() {
         String name = "Firmans kurinpalautus";
         Date date = getRandomDateBetween(2012,2015);
-        eventService.createEvent(name, date);
+        eventService.createEvent(name, date, new GroupAccount());
         
         Event event = eventRepository.findByName(name);
         assertNotNull(event);
@@ -70,7 +71,7 @@ public class EventServiceTest {
     
     @Test
     public void testMovieAddedToEvent() {
-        Event event = eventService.createEvent("Firmans kurinpalautus", getRandomDateBetween(2012,2015));
+        Event event = eventService.createEvent("Firmans kurinpalautus", getRandomDateBetween(2012,2015), new GroupAccount());
         Movie movie = eventService.createMovie("The Room", 99, "tt0368226");
         
         assertNotNull(eventRepository.findByName("Firmans kurinpalautus"));

@@ -2,29 +2,26 @@ package wad.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class GroupAccount extends AbstractPersistable<Long> {
 
-    @NotBlank
     @Column(unique=true)
     private String name;
     
-    @NotBlank
     @Column(unique=true)
     private String username;
     
-    @NotBlank
     private String password;
     
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="group", fetch = FetchType.EAGER)
     private List<Event> events;
 
     
@@ -52,5 +49,20 @@ public class GroupAccount extends AbstractPersistable<Long> {
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public List<Event> getEvents() {
+        return events;
+    }
+    
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+    
+    public void addEvent(Event event) {
+        if (this.events == null) {
+            this.events = new ArrayList<Event>();
+        }
+        this.events.add(event);
     }
 }
