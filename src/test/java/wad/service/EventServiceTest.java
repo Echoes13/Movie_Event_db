@@ -12,6 +12,7 @@ import wad.domain.Event;
 import wad.domain.GroupAccount;
 import wad.domain.Movie;
 import wad.repository.EventRepository;
+import wad.repository.GroupRepository;
 import wad.repository.MovieChoiceRepository;
 import wad.repository.MovieRepository;
 import static wad.util.DateTestUtils.getRandomDateBetween;
@@ -22,6 +23,9 @@ public class EventServiceTest {
         
     @Autowired
     private EventService eventService;
+    
+    @Autowired
+    private GroupRepository groupRepository;
     
     @Autowired
     private EventRepository eventRepository;
@@ -42,7 +46,8 @@ public class EventServiceTest {
     public void testEventCreatedAndDeleted() {
         String name = "Firmans kurinpalautus";
         Date date = getRandomDateBetween(2012,2015);
-        eventService.createEvent(name, date, new GroupAccount());
+        GroupAccount group = groupRepository.save(new GroupAccount());
+        eventService.createEvent(name, date, group);
         
         Event event = eventRepository.findByName(name);
         assertNotNull(event);
@@ -71,7 +76,8 @@ public class EventServiceTest {
     
     @Test
     public void testMovieAddedToEvent() {
-        Event event = eventService.createEvent("Firmans kurinpalautus", getRandomDateBetween(2012,2015), new GroupAccount());
+        Event event = eventService.createEvent("Firmans kurinpalautus",
+                getRandomDateBetween(2012,2015), groupRepository.save(new GroupAccount()));
         Movie movie = eventService.createMovie("The Room", 99, "tt0368226");
         
         assertNotNull(eventRepository.findByName("Firmans kurinpalautus"));
