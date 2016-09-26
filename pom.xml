@@ -84,7 +84,7 @@
             <artifactId>htmlunit-driver</artifactId>
         </dependency>
         <dependency>
-            <groupId>eventdb</groupId>
+            <groupId>wad</groupId>
             <artifactId>Movie_marathon_db</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>test</scope>
