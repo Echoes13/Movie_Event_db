@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/wad/* EventDbApplication
+web: java $JAVA_OPTS -cp target/classes:target/dependencies/* EventDbApplication
