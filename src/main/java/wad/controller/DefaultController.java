@@ -26,23 +26,23 @@ public class DefaultController {
     
 //    Sovelluksen alustamiseen käytetty metodi
 //    
-//    @PostConstruct
-//    public void init() {
-//        groupRepository.deleteAll();
-//        
-//        GroupAccount admin = new GroupAccount();
-//        admin.setName("Admin");
-//        admin.setUsername("Admin");
-//        admin.setPassword(passwordEncoder.encode("sevento22"));
-//
-//        groupRepository.save(admin);
-//        
-//        GroupAccount firman = new GroupAccount();
-//        firman.setName("FirmÅn");
-//        firman.setUsername("tommywiseau22");
-//        firman.setPassword(passwordEncoder.encode("doublekimble"));
-//
-//        groupRepository.save(firman);
-//    }
+    @PostConstruct
+    public void init() {
+        groupRepository.deleteAll();
+        
+        GroupAccount admin = new GroupAccount();
+        admin.setName("Admin");
+        admin.setUsername("Admin");
+        admin.setPassword(passwordEncoder.encode("sevento22"));
+
+        groupRepository.save(admin);
+        
+        GroupAccount firman = new GroupAccount();
+        firman.setName("FirmÅn");
+        firman.setUsername("tommywiseau22");
+        firman.setPassword(passwordEncoder.encode("doublekimble"));
+
+        groupRepository.save(firman);
+    }
 }
 
