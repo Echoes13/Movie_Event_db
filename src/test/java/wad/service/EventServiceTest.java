@@ -39,46 +39,34 @@ public class EventServiceTest {
     
     @Before
     public void init() {
-        eventService.clearAll();
     }
     
     @Test
     public void testEventCreatedAndDeleted() {
-        String name = "Firmans kurinpalautus";
-        Date date = getRandomDate();
-        GroupAccount group = groupRepository.save(new GroupAccount());
-        eventService.createEvent(name, date, group);
-        
-        Event event = eventRepository.findByName(name);
+        Event event = createEvent();
         assertNotNull(event);
         
         eventService.deleteEvent(event.getId());
         
-        assertNull(eventRepository.findByName(name));
+        assertNull(eventRepository.findByName(event.getName()));
         
     }
     
     @Test
     public void testMovieCreatedAndDeleted() {
-        String name = "The Room";
-        Integer length = 99;
-        String imdb = "tt0368226";
-        eventService.createMovie(name, length, imdb);
-        
-        Movie movie = movieRepository.findByName(name);
+        Movie movie = createMovie();
         assertNotNull(movie);
         
         eventService.deleteMovie(movie.getId());
         
-        assertNull(movieRepository.findByName(name));
+        assertNull(movieRepository.findByName(movie.getName()));
         
     }
     
     @Test
     public void testMovieAddedToEvent() {
-        Event event = eventService.createEvent("Firmans kurinpalautus",
-                getRandomDate(), groupRepository.save(new GroupAccount()));
-        Movie movie = eventService.createMovie("The Room", 99, "tt0368226");
+        Event event = createEvent();
+        Movie movie = createMovie();
         
         assertNotNull(eventRepository.findByName("Firmans kurinpalautus"));
         assertNotNull(movieRepository.findByName("The Room"));
@@ -90,7 +78,26 @@ public class EventServiceTest {
         assertEquals(1, movieRepository.findByName("The Room").getChoices().size());
         assertEquals(1, movieChoiceRepository.findAll().size());
         
+        eventService.deleteEvent(event.getId());
+        eventService.deleteMovie(movie.getId());
+        
+        assertNull(eventRepository.findByName("Firmans kurinpalautus"));
+        assertNull(movieRepository.findByName("The Room"));
+        
     }
     
+    public Event createEvent() {
+        String name = "Firmans kurinpalautus";
+        Date date = getRandomDate();
+        GroupAccount group = groupRepository.save(new GroupAccount());
+        return eventService.createEvent(name, date, group);
+    }
+    
+    public Movie createMovie() {
+        String name = "The Room";
+        Integer length = 99;
+        String imdb = "tt0368226";
+        return eventService.createMovie(name, length, imdb);
+    }
 }
 

@@ -30,15 +30,15 @@
         </table>
         
         <h2>Add a new event</h2>
-        <form th:action="@{/events}" method="POST">
+        <form th:action="@{/events}" method="POST" id="addEvent">
             <table>
                 <tr>
                     <td>Name:</td>
-                    <td><input type="text" name="name" /></td>
+                    <td><input type="text" name="name" id="name" /></td>
                 </tr>
                 <tr>
                     <td>Date</td>
-                    <td><input type="date" name="date" /></td>
+                    <td><input type="date" name="date" id="date" /></td>
                 </tr>
                 <tr>
                     <td><button type="submit">Add</button></td>

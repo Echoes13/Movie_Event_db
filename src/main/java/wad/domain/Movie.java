@@ -2,16 +2,18 @@ package wad.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Min;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+//Luokka elokuvalle. Elokuvaan liittyy nollasta useampaan elokuvavalintaa.
 
 @Entity
 public class Movie extends AbstractPersistable<Long> {
 
+    @Column(unique=true)
     private String name;
     
     private Integer lengthInMinutes;

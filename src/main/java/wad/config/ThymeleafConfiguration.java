@@ -6,6 +6,8 @@ import org.thymeleaf.templateresolver.FileTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+//Konfiguraatioluokka joka varmistaa että html-tiedostot löytyvät
+
 @Configuration
 public class ThymeleafConfiguration {
   @Bean

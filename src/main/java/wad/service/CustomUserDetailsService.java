@@ -10,9 +10,12 @@ import org.springframework.stereotype.Service;
 import wad.domain.GroupAccount;
 import wad.repository.GroupRepository;
 
+//Palvelu käyttäjätilin tunnistautumista varten. Antaa ainoastaan "admin"-
+//tilille ADMIN-valtuudet.
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
+    
     @Autowired
     private GroupRepository groupRepository;
 

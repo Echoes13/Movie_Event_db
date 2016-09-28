@@ -6,6 +6,8 @@ import wad.domain.MovieChoice;
 import wad.domain.Event;
 import wad.domain.Movie;
 
+//Elokuvavalintarepositori
+
 public interface MovieChoiceRepository extends JpaRepository<MovieChoice, Long> {
     public List<MovieChoice> findByEvent(Event event);
     public List<MovieChoice> findByMovie(Movie movie);

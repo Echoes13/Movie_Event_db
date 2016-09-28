@@ -14,6 +14,10 @@ import wad.repository.EventRepository;
 import wad.repository.MovieRepository;
 import wad.repository.MovieChoiceRepository;
 
+//Palvelu tapahtumien ja elokuvien käsittelyyn. Palvelua käytetään tapahtumien
+//ja elokuvien lisäämiseen ja poistamiseen. Käytetään myös elokuvavalintojen
+//luomiseen, eli siihen kun tapahtumaan liitetään tietty elokuva.
+
 @Service
 public class EventService {
 
@@ -101,7 +105,7 @@ public class EventService {
     }
     
     
-    
+//  Metodeja sovelluksen nollaamista varten
     
     @Transactional
     public void clearAll() {

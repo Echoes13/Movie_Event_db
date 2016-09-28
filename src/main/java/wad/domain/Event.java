@@ -3,18 +3,22 @@ package wad.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+
+//Luokka tapahtumille. Tapahtumaan liittyy yksi käyttäjäryhmä ja nollasta
+//useampaan elokuvavalintaa.
 
 @Entity
 public class Event extends AbstractPersistable<Long> {
 
+    @Column(unique=true)
     private String name;
     
     @Temporal(TemporalType.DATE)
@@ -61,6 +65,7 @@ public class Event extends AbstractPersistable<Long> {
         if (!this.movies.contains(movie)) {
             return;            
         }
+        this.length -= movie.getMovie().getLengthInMinutes();
         this.movies.remove(movie);
     }
  

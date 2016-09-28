@@ -10,6 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+//Luokka ryhmän käyttäjätilille. Käyttäjätiliin liittyy nollasta useampaan
+//tapahtumaa.
+
 @Entity
 public class GroupAccount extends AbstractPersistable<Long> {
 

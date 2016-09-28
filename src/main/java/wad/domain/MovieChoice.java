@@ -5,6 +5,9 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+//Luokka elokuvavalinnalle. Elokuvavalintaan liittyy yksi tapahtuma
+//ja yksi elokuva. Toimii liitoksena elokuvien ja tapahtumien välillä.
+
 @Entity
 public class MovieChoice extends AbstractPersistable<Long> {
 
